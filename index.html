@@ -1,0 +1,771 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antibiotic Disposal Awareness Survey</title>
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --primary-light: #8a2be2;
+            --primary-dark: #4b0082;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #333333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .survey-container {
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 800px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-container {
+            background-color: var(--medium-gray);
+            height: 8px;
+            width: 100%;
+            border-radius: 0;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .card {
+            padding: 30px;
+            display: none;
+        }
+        
+        .card.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .intro-text {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .intro-text p {
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .option {
+            padding: 12px 15px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            border-color: var(--primary-light);
+            background-color: rgba(106, 13, 173, 0.05);
+        }
+        
+        .option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(106, 13, 173, 0.1);
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: border-color 0.2s ease;
+        }
+        
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 25px 0;
+        }
+        
+        .checkbox-container input {
+            margin-top: 5px;
+        }
+        
+        .checkbox-label {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-prev {
+            background-color: var(--medium-gray);
+            color: var(--dark-gray);
+        }
+        
+        .btn-prev:hover:not(:disabled) {
+            background-color: #d0d0d0;
+        }
+        
+        .btn-next, .btn-submit {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .btn-next:hover:not(:disabled), .btn-submit:hover:not(:disabled) {
+            background-color: var(--primary-dark);
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .question-counter {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: var(--dark-gray);
+        }
+        
+        .thank-you {
+            text-align: center;
+            padding: 50px 30px;
+        }
+        
+        .thank-you h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .thank-you p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 22px;
+            }
+            
+            h2 {
+                font-size: 18px;
+            }
+            
+            .question-text {
+                font-size: 16px;
+            }
+            
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div id="cardsContainer">
+            <!-- Cards will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        // CARD TYPE CONSTANTS
+        const CARD_TYPES = {
+            INTRODUCTION: 'introduction',
+            NAME_SPECIALIZATION: 'name_specialization', 
+            SINGLE_CHOICE: 'single_choice',
+            TEXT_INPUT: 'text_input',
+            TEXTAREA: 'textarea',
+            THANK_YOU: 'thank_you'
+        };
+
+        // SURVEY STRUCTURE
+        const surveyStructure = [
+            // CARD 0: Introduction
+            {
+                type: CARD_TYPES.INTRODUCTION,
+                title: "Antibiotic Disposal Awareness Research",
+                content: `
+                    <p>Hello, I'm Anika Nagpal, a 2nd-year MBBS student at GMERS Gotri.</p>
+                    <p>I'm conducting research on antibiotic disposal practices - a topic that deserves more attention in our fight against antimicrobial resistance.</p>
+                    <p>This study explores the knowledge, practices, and perspectives of healthcare professionals regarding antibiotic disposal protocols and stewardship.</p>
+                    <p>Excitingly, this is my first research project, done under the guidance of my mentor, Dr.Kajal Davara Ma'am.</p>
+		    <p>I've built this website myself to gather the insights in a curated, hands-on way.</p>
+                    <p>Your participation contributes to understanding and improving antibiotic disposal practices. Thank you so much for your valuable time.</p>
+                `,
+                checkbox: "I understand the purpose of this research and voluntarily agree to participate."
+            },
+            
+            // CARD 1: Name and Specialization
+            {
+                type: CARD_TYPES.NAME_SPECIALIZATION,
+                title: "Basic Information"
+            },
+            
+            // CARDS 2-20: Questions 1-19
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "How do you usually define the end-point of antibiotic stewardship — does it, in your view, include disposal protocols?",
+                options: ["Yes", "No", "Not certain"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Which route of disposal poses the greatest ecological risk?",
+                options: ["Domestic drain/washbasin", "Municipal solid waste", "Controlled biomedical route", "Unused sample redistribution"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Are you aware of any formal or institutional guideline on antibiotic disposal (CPCB / WHO / NMC / hospital SOP)?",
+                options: ["Yes", "Aware vaguely", "Not aware"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Was antibiotic disposal ever formally addressed in your undergraduate or postgraduate training?",
+                options: ["Yes", "No"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Which of the following contributes most directly to antimicrobial resistance in the community?",
+                options: ["Incomplete therapy", "Overprescription", "Improper disposal", "All of the above"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "How significant do you consider antibiotic disposal in the overall AMR narrative?",
+                options: ["Central", "Important but secondary", "Marginal", "Negligible"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "In your opinion, who carries the primary operational responsibility for ensuring correct disposal?",
+                options: ["Treating clinician", "Hospital administration", "Pharmacist", "Regulatory authorities"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "How confident are you that your institution disposes antibiotics as per accepted norms?",
+                options: ["Fully confident", "Uncertain", "Likely not standardized"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Would you support a structured 'take-back' mechanism through hospital pharmacy or public channels?",
+                options: ["Strongly yes", "Possibly", "No"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Do you believe clinicians discuss or reflect adequately on the disposal aspect of antibiotic stewardship?",
+                options: ["Routinely", "Occasionally", "Rarely", "Never"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "How are expired/unused antibiotics from your practice or ward currently discarded?",
+                options: ["Routed through biomedical waste management system", "Discarded with general waste", "Flushed or destroyed personally", "Returned to supplier/distributor"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Do you counsel patients regarding safe disposal of leftover antibiotics?",
+                options: ["Routinely", "Occasionally", "Seldom", "Never"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Do you ever receive unused antibiotics back from patients?",
+                options: ["Yes, occasionally", "Rarely", "Never"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "How frequently are expiry audits conducted for antibiotic stocks in your practice/ward?",
+                options: ["Regularly scheduled", "Intermittent", "Only when flagged", "Not practiced"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Have you ever intervened or reported improper antibiotic disposal within your setup?",
+                options: ["Yes", "No"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.TEXT_INPUT,
+                question: "What is the most practical obstacle to proper antibiotic disposal at your workplace?",
+                required: true,
+                autoAdvance: false
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Would you support inclusion of disposal protocols within CME or antibiotic stewardship modules?",
+                options: ["Yes", "Maybe", "No"],
+                required: true,
+                autoAdvance: false
+            },
+            {
+                type: CARD_TYPES.TEXT_INPUT,
+                question: "What single actionable step, if implemented immediately, according to you, could make antibiotic disposal more compliant across institutions?",
+                required: true,
+                autoAdvance: false
+            },
+            {
+                type: CARD_TYPES.TEXTAREA,
+                question: "Further comments/additional thoughts",
+                required: false,
+                autoAdvance: false
+            },
+            
+            // CARD 21: Thank You
+            {
+                type: CARD_TYPES.THANK_YOU
+            }
+        ];
+
+        // STATE MANAGEMENT
+        let currentCardIndex = 0;
+        const totalCards = surveyStructure.length;
+        const responses = {};
+
+        // Initialize survey
+        function initSurvey() {
+            createCards();
+            setupEventListeners();
+            updateProgressBar();
+            showCard(0);
+        }
+
+        // Create all cards based on survey structure
+        function createCards() {
+            const container = document.getElementById('cardsContainer');
+            
+            surveyStructure.forEach((cardConfig, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.id = `card-${index}`;
+                card.innerHTML = generateCardHTML(cardConfig, index);
+                container.appendChild(card);
+            });
+        }
+
+        // Generate HTML for each card type
+        function generateCardHTML(cardConfig, cardIndex) {
+            switch(cardConfig.type) {
+                case CARD_TYPES.INTRODUCTION:
+                    return `
+                        <h1>${cardConfig.title}</h1>
+                        <div class="intro-text">${cardConfig.content}</div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="consentCheckbox">
+                            <label for="consentCheckbox" class="checkbox-label">${cardConfig.checkbox}</label>
+                        </div>
+                        <div class="error-message" id="consentError">Please agree to participate to continue</div>
+                        <div class="navigation">
+                            <button disabled class="btn-prev">Previous</button>
+                            <button class="btn-next">Next</button>
+                        </div>
+                        <div class="question-counter">Introduction</div>
+                    `;
+                    
+                case CARD_TYPES.NAME_SPECIALIZATION:
+                    return `
+                        <h2>${cardConfig.title}</h2>
+                        <div class="question-text">Your name:</div>
+                        <input type="text" id="doctorName" placeholder="Enter your full name">
+                        <div class="error-message" id="nameError">Please enter your name</div>
+                        
+                        <div class="question-text">Your Designation (Intern/R1/R2/R3/Consultant) / Specialization:</div>
+                        <input type="text" id="doctorSpecialization" placeholder="Enter your medical specialization">
+                        <div class="error-message" id="specializationError">Please enter your specialization</div>
+                        
+                        <div class="navigation">
+                            <button class="btn-prev">Previous</button>
+                            <button class="btn-next">Next</button>
+                        </div>
+                        <div class="question-counter">Basic Information</div>
+                    `;
+                    
+                case CARD_TYPES.SINGLE_CHOICE:
+                    const questionNumber = cardIndex - 1; // Subtract intro and name cards
+                    return `
+                        <h2>Question ${questionNumber}</h2>
+                        <div class="question-text">${cardConfig.question}</div>
+                        <div class="options-container">
+                            ${cardConfig.options.map(option => `
+                                <div class="option" data-value="${option}">${option}</div>
+                            `).join('')}
+                        </div>
+                        ${cardConfig.required ? '<div class="error-message">Please select an option</div>' : ''}
+                        <div class="navigation">
+                            <button class="btn-prev">Previous</button>
+                            ${cardIndex === totalCards - 2 ? '<button class="btn-submit">Submit</button>' : '<button class="btn-next">Next</button>'}
+                        </div>
+                        <div class="question-counter">Question ${questionNumber} of 19</div>
+                    `;
+                    
+                case CARD_TYPES.TEXT_INPUT:
+                    const textQuestionNumber = cardIndex - 1;
+                    return `
+                        <h2>Question ${textQuestionNumber}</h2>
+                        <div class="question-text">${cardConfig.question}</div>
+                        <input type="text" placeholder="Enter your response">
+                        ${cardConfig.required ? '<div class="error-message">Please enter your response</div>' : ''}
+                        <div class="navigation">
+                            <button class="btn-prev">Previous</button>
+                            ${cardIndex === totalCards - 2 ? '<button class="btn-submit">Submit</button>' : '<button class="btn-next">Next</button>'}
+                        </div>
+                        <div class="question-counter">Question ${textQuestionNumber} of 19</div>
+                    `;
+                    
+                case CARD_TYPES.TEXTAREA:
+                    const textareaQuestionNumber = cardIndex - 1;
+                    return `
+                        <h2>Question ${textareaQuestionNumber}</h2>
+                        <div class="question-text">${cardConfig.question}</div>
+                        <textarea placeholder="Enter your comments here..."></textarea>
+                        ${cardConfig.required ? '<div class="error-message">Please enter your response</div>' : ''}
+                        <div class="navigation">
+                            <button class="btn-prev">Previous</button>
+                            <button class="btn-submit">Submit</button>
+                        </div>
+                        <div class="question-counter">Question ${textareaQuestionNumber} of 19</div>
+                    `;
+                    
+                case CARD_TYPES.THANK_YOU:
+                    return `
+                        <div class="thank-you">
+                            <h2>Thank You!</h2>
+                            <p>Your response has been recorded successfully.</p>
+                            <p>Your participation is greatly appreciated and will contribute to our understanding of antibiotic disposal practices.</p>
+                        </div>
+                    `;
+                    
+                default:
+                    return '<div>Error: Unknown card type</div>';
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            document.addEventListener('click', function(e) {
+                const target = e.target;
+                
+                if (target.classList.contains('btn-next')) {
+                    handleNext();
+                } else if (target.classList.contains('btn-prev')) {
+                    handlePrev();
+                } else if (target.classList.contains('btn-submit')) {
+                    handleSubmit();
+                } else if (target.classList.contains('option')) {
+                    handleOptionSelect(target);
+                }
+            });
+
+            document.addEventListener('input', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    saveTextResponse(e.target);
+                }
+            });
+        }
+
+        // Navigation handlers
+        function handleNext() {
+            if (validateCurrentCard()) {
+                showCard(currentCardIndex + 1);
+            }
+        }
+
+        function handlePrev() {
+            showCard(currentCardIndex - 1);
+        }
+
+        function handleSubmit() {
+            if (validateCurrentCard()) {
+                saveFinalResponses();
+                submitToGoogleSheets();
+                showCard(currentCardIndex + 1);
+            }
+        }
+
+        // Show specific card
+        function showCard(cardIndex) {
+            // Hide current card
+            const currentCard = document.getElementById(`card-${currentCardIndex}`);
+            if (currentCard) currentCard.classList.remove('active');
+            
+            // Show new card
+            const newCard = document.getElementById(`card-${cardIndex}`);
+            if (newCard) newCard.classList.add('active');
+            
+            // Update state
+            currentCardIndex = cardIndex;
+            updateProgressBar();
+            window.scrollTo(0, 0);
+        }
+
+        // Validate current card
+        function validateCurrentCard() {
+            const currentCard = document.getElementById(`card-${currentCardIndex}`);
+            const cardConfig = surveyStructure[currentCardIndex];
+            
+            switch(cardConfig.type) {
+                case CARD_TYPES.INTRODUCTION:
+                    const consentChecked = document.getElementById('consentCheckbox').checked;
+                    if (!consentChecked) {
+                        document.getElementById('consentError').style.display = 'block';
+                        return false;
+                    }
+                    document.getElementById('consentError').style.display = 'none';
+                    return true;
+                    
+                case CARD_TYPES.NAME_SPECIALIZATION:
+                    const name = document.getElementById('doctorName').value.trim();
+                    const specialization = document.getElementById('doctorSpecialization').value.trim();
+                    let isValid = true;
+                    
+                    if (!name) {
+                        document.getElementById('nameError').style.display = 'block';
+                        isValid = false;
+                    } else {
+                        document.getElementById('nameError').style.display = 'none';
+                    }
+                    
+                    if (!specialization) {
+                        document.getElementById('specializationError').style.display = 'block';
+                        isValid = false;
+                    } else {
+                        document.getElementById('specializationError').style.display = 'none';
+                    }
+                    
+                    return isValid;
+                    
+                case CARD_TYPES.SINGLE_CHOICE:
+                    if (cardConfig.required) {
+                        const selectedOption = currentCard.querySelector('.option.selected');
+                        const errorMessage = currentCard.querySelector('.error-message');
+                        if (!selectedOption) {
+                            errorMessage.style.display = 'block';
+                            return false;
+                        }
+                        errorMessage.style.display = 'none';
+                    }
+                    return true;
+                    
+                case CARD_TYPES.TEXT_INPUT:
+                case CARD_TYPES.TEXTAREA:
+                    if (cardConfig.required) {
+                        const input = currentCard.querySelector('input, textarea');
+                        const errorMessage = currentCard.querySelector('.error-message');
+                        if (!input.value.trim()) {
+                            errorMessage.style.display = 'block';
+                            return false;
+                        }
+                        errorMessage.style.display = 'none';
+                    }
+                    return true;
+                    
+                default:
+                    return true;
+            }
+        }
+
+        // Handle option selection
+        function handleOptionSelect(optionElement) {
+            const card = optionElement.closest('.card');
+            const options = card.querySelectorAll('.option');
+            
+            options.forEach(opt => opt.classList.remove('selected'));
+            optionElement.classList.add('selected');
+            
+            // Save response
+            const cardIndex = parseInt(card.id.split('-')[1]);
+            const questionNumber = cardIndex - 1;
+            responses[`q${questionNumber}`] = optionElement.dataset.value;
+            
+            // Auto-advance for eligible questions
+            const cardConfig = surveyStructure[cardIndex];
+            if (cardConfig.autoAdvance) {
+                setTimeout(() => {
+                    if (validateCurrentCard()) {
+                        handleNext();
+                    }
+                }, 500);
+            }
+        }
+
+        // Save text responses
+        function saveTextResponse(inputElement) {
+            const card = inputElement.closest('.card');
+            const cardIndex = parseInt(card.id.split('-')[1]);
+            const questionNumber = cardIndex - 1;
+            responses[`q${questionNumber}`] = inputElement.value;
+        }
+
+        // Save final responses
+        function saveFinalResponses() {
+            responses.name = document.getElementById('doctorName').value;
+            responses.specialization = document.getElementById('doctorSpecialization').value;
+            responses.consent = document.getElementById('consentCheckbox').checked ? 'Yes' : 'No';
+        }
+
+        // Update progress bar
+        function updateProgressBar() {
+            const progressBar = document.getElementById('progressBar');
+            const progress = (currentCardIndex / (totalCards - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Submit to Google Sheets
+        function submitToGoogleSheets() {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyBejxmbL1mM1LClu_7CZ0apXM2whIPfSbQly-00HZKy3KPQACvCb0q_0kyQoUUhNUu/exec';
+            
+            const data = {
+                'consent': responses.consent,
+                'name': responses.name || '',
+                'specialization': responses.specialization || '',
+                ...responses
+            };
+            
+            const formData = new URLSearchParams();
+            for (const key in data) {
+                formData.append(key, data[key]);
+            }
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initSurvey);
+    </script>
+</body>
+</html>
