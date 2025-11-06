@@ -308,49 +308,21 @@
             // CARDS 2-20: Questions 1-19
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "How do you usually define the end-point of antibiotic stewardship — does it, in your view, include disposal protocols?",
-                options: ["Yes", "No", "Not certain"],
+                question: "How important is the role of 'antibiotic disposal practices' in Antimicribial Resistance?",
+                options: ["Major role", "Important but secondary", "Insignificant"],
                 required: true,
                 autoAdvance: true
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
                 question: "Which route of disposal poses the greatest ecological risk?",
-                options: ["Domestic drain/washbasin", "Municipal solid waste", "Controlled biomedical route", "Unused sample redistribution"],
+                options: ["Municipal solid waste", "Domestic drain/washbasin", "Controlled biomedical route", "Unused sample redistribution"],
                 required: true,
                 autoAdvance: true
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Are you aware of any formal or institutional guideline on antibiotic disposal (CPCB / WHO / NMC / hospital SOP)?",
-                options: ["Yes", "Aware vaguely", "Not aware"],
-                required: true,
-                autoAdvance: true
-            },
-            {
-                type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Was antibiotic disposal ever formally addressed in your undergraduate or postgraduate training?",
-                options: ["Yes", "No"],
-                required: true,
-                autoAdvance: true
-            },
-            {
-                type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Which of the following contributes most directly to antimicrobial resistance in the community?",
-                options: ["Incomplete therapy", "Overprescription", "Improper disposal", "All of the above"],
-                required: true,
-                autoAdvance: true
-            },
-            {
-                type: CARD_TYPES.SINGLE_CHOICE,
-                question: "How significant do you consider antibiotic disposal in the overall AMR narrative?",
-                options: ["Central", "Important but secondary", "Marginal", "Negligible"],
-                required: true,
-                autoAdvance: true
-            },
-            {
-                type: CARD_TYPES.SINGLE_CHOICE,
-                question: "In your opinion, who carries the primary operational responsibility for ensuring correct disposal?",
+                question: "The last time you disposed of antibiotics, where did u put them?",
                 options: ["Treating clinician", "Hospital administration", "Pharmacist", "Regulatory authorities"],
                 required: true,
                 autoAdvance: true
@@ -526,7 +498,7 @@
                             <button class="btn-prev">Previous</button>
                             ${cardIndex === totalCards - 2 ? '<button class="btn-submit">Submit</button>' : '<button class="btn-next">Next</button>'}
                         </div>
-                        <div class="question-counter">Question ${questionNumber} of 19</div>
+                        <div class="question-counter">Question ${questionNumber} of 10</div>
                     `;
                     
                 case CARD_TYPES.TEXT_INPUT:
@@ -540,7 +512,7 @@
                             <button class="btn-prev">Previous</button>
                             ${cardIndex === totalCards - 2 ? '<button class="btn-submit">Submit</button>' : '<button class="btn-next">Next</button>'}
                         </div>
-                        <div class="question-counter">Question ${textQuestionNumber} of 19</div>
+                        <div class="question-counter">Question ${textQuestionNumber} of 10</div>
                     `;
                     
                 case CARD_TYPES.TEXTAREA:
@@ -554,7 +526,7 @@
                             <button class="btn-prev">Previous</button>
                             <button class="btn-submit">Submit</button>
                         </div>
-                        <div class="question-counter">Question ${textareaQuestionNumber} of 19</div>
+                        <div class="question-counter">Question ${textareaQuestionNumber} of 10</div>
                     `;
                     
                 case CARD_TYPES.THANK_YOU:
@@ -786,6 +758,7 @@
 </body>
 
 </html>
+
 
 
 
