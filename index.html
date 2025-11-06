@@ -292,8 +292,8 @@
                 content: `
                     <p>Greetings, I'm Anika Nagpal, a 2nd-year MBBS student at GMERS, Gotri.</p>
                     <p>I'm conducting research on antibiotic disposal practices - a topic that deserves more attention in the fight against antimicrobial resistance.</p>
-                    <p>This study explores the knowledge, practices, and perspectives of healthcare professionals regarding antibiotic disposal protocols and stewardship.</p>
-                    <p>This research project is done under the guidance of my mentor, Dr. Kajal Davara Ma'am.</p>
+                    <p>Please answer honestly- there are no right or wrong answers.</p>
+                    <p>This research project is done under the guidance of my mentor.</p>
                     <p>Your participation contributes to understanding and improving antibiotic disposal practices. Thank you so much for your valuable time.</p>
                 `,
                 checkbox: "I understand the purpose of this research and voluntarily agree to participate."
@@ -308,14 +308,14 @@
             // CARDS 2-20: Questions 1-19
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "How important is the role of 'antibiotic disposal practices' in Antimicribial Resistance?",
+                question: "How significant do you consider the role of 'antibiotic disposal practices' in Antimicribial Resistance?",
                 options: ["Major role", "Important but secondary", "Insignificant"],
                 required: true,
                 autoAdvance: true
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Which route of disposal poses the greatest ecological risk?",
+                question: "Which route of disposal poses the greatest ecological risk according to you?",
                 options: ["Municipal solid waste", "Domestic drain/washbasin", "Controlled biomedical route", "Unused sample redistribution"],
                 required: true,
                 autoAdvance: true
@@ -329,13 +329,6 @@
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "In your institution, how well does the existing biomedical waste protocols cover antibiotic disposal?",
-                options: ["Fully integrated- specific bins/ guidelines exists", "Partially - antibiotics go with general pharma waste", "Not specified for antibiotics", "Unaware of any such protocol"],
-                required: true,
-                autoAdvance: true
-            },
-            {
-                type: CARD_TYPES.SINGLE_CHOICE,
                 question: "Do you think a structured 'take-back' mechanism through hospital pharmacy or public channels will be a practical solution?",
                 options: ["Strongly yes", "Possibly", "No"],
                 required: true,
@@ -343,14 +336,7 @@
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Do you believe clinicians discuss or reflect adequately on the disposal aspect of antibiotic stewardship?",
-                options: ["Routinely", "Occasionally", "Rarely", "Never"],
-                required: true,
-                autoAdvance: true
-            },
-            {
-                type: CARD_TYPES.SINGLE_CHOICE,
-                question: "How are expired/unused antibiotics from your practice or ward currently discarded?",
+                question: "How, do you think, are expired/unused antibiotics from your practice or ward currently discarded?",
                 options: ["Discarded with general waste", "Routed through biomedical waste management system", "Flushed down the drain", "Returned to supplier/distributor"],
                 required: true,
                 autoAdvance: true
@@ -378,13 +364,14 @@
             },
             {
                 type: CARD_TYPES.TEXT_INPUT,
-                question: "What is the most practical obstacle to proper antibiotic disposal at your workplace?",
+                question: "What is the main reason for improper antibiotic disposal in your eyes?",
+                options: ["No separate bins available nearby", "Not sure which bin is correct for pills", "Seems too minor/ harmless", "Peole are too busy/ forgetful", "Noone enforces it"]
                 required: true,
                 autoAdvance: false
             },
             {
                 type: CARD_TYPES.TEXT_INPUT,
-                question: "What single actionable step, if implemented immediately, according to you, could make antibiotic disposal more compliant across institutions?",
+                question: "In your opinion, what practical step could improve how antibiotics are disposed off in community and within hospitals?",
                 required: true,
                 autoAdvance: false
             },
@@ -744,6 +731,7 @@
 </body>
 
 </html>
+
 
 
 
