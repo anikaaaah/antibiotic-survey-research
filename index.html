@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,14 +16,14 @@
             --dark-gray: #333333;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: var(--white);
             color: var(--dark-gray);
@@ -34,7 +34,7 @@
             justify-content: center;
             align-items: center;
         }
-        
+
         .survey-container {
             background-color: var(--beige);
             border-radius: 12px;
@@ -44,73 +44,73 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         .progress-container {
             background-color: var(--medium-gray);
             height: 8px;
             width: 100%;
             border-radius: 0;
         }
-        
+
         .progress-bar {
             height: 100%;
             background-color: var(--primary-color);
             width: 0%;
             transition: width 0.3s ease;
         }
-        
+
         .card {
             padding: 30px;
             display: none;
         }
-        
+
         .card.active {
             display: block;
             animation: fadeIn 0.5s ease;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateX(20px); }
             to { opacity: 1; transform: translateX(0); }
         }
-        
+
         .intro-text {
             margin-bottom: 20px;
             font-size: 16px;
             line-height: 1.7;
         }
-        
+
         .intro-text p {
             margin-bottom: 15px;
         }
-        
+
         h1 {
             color: var(--primary-dark);
             margin-bottom: 20px;
             font-size: 24px;
             text-align: center;
         }
-        
+
         h2 {
             color: var(--primary-color);
             margin-bottom: 20px;
             font-size: 20px;
         }
-        
+
         .question-text {
             font-size: 18px;
             margin-bottom: 25px;
             font-weight: 600;
             color: var(--dark-gray);
         }
-        
+
         .options-container {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 30px;
         }
-        
+
         .option {
             padding: 12px 15px;
             border: 2px solid var(--medium-gray);
@@ -118,17 +118,17 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
+
         .option:hover {
             border-color: var(--primary-light);
             background-color: rgba(106, 13, 173, 0.05);
         }
-        
+
         .option.selected {
             border-color: var(--primary-color);
             background-color: rgba(106, 13, 173, 0.1);
         }
-        
+
         input[type="text"], textarea {
             width: 100%;
             padding: 12px 15px;
@@ -138,39 +138,39 @@
             margin-bottom: 20px;
             transition: border-color 0.2s ease;
         }
-        
+
         input[type="text"]:focus, textarea:focus {
             outline: none;
             border-color: var(--primary-color);
         }
-        
+
         textarea {
             min-height: 120px;
             resize: vertical;
         }
-        
+
         .checkbox-container {
             display: flex;
             align-items: flex-start;
             gap: 10px;
             margin: 25px 0;
         }
-        
+
         .checkbox-container input {
             margin-top: 5px;
         }
-        
+
         .checkbox-label {
             font-size: 16px;
             line-height: 1.5;
         }
-        
+
         .navigation {
             display: flex;
             justify-content: space-between;
             margin-top: 30px;
         }
-        
+
         button {
             padding: 12px 25px;
             border: none;
@@ -180,80 +180,80 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-        
+
         .btn-prev {
             background-color: var(--medium-gray);
             color: var(--dark-gray);
         }
-        
+
         .btn-prev:hover:not(:disabled) {
             background-color: #d0d0d0;
         }
-        
+
         .btn-next, .btn-submit {
             background-color: var(--primary-color);
             color: var(--white);
         }
-        
+
         .btn-next:hover:not(:disabled), .btn-submit:hover:not(:disabled) {
             background-color: var(--primary-dark);
         }
-        
+
         button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
-        
+
         .question-counter {
             text-align: center;
             margin-top: 15px;
             font-size: 14px;
             color: var(--dark-gray);
         }
-        
+
         .thank-you {
             text-align: center;
             padding: 50px 30px;
         }
-        
+
         .thank-you h2 {
             color: var(--primary-color);
             margin-bottom: 20px;
         }
-        
+
         .thank-you p {
             font-size: 18px;
             margin-bottom: 30px;
         }
-        
+
         .error-message {
             color: #e74c3c;
             font-size: 14px;
             margin-top: 5px;
             display: none;
         }
-        
+
         @media (max-width: 600px) {
             body {
                 padding: 10px;
             }
-            
+
             .card {
                 padding: 20px;
             }
-            
+
             h1 {
                 font-size: 22px;
             }
-            
+
             h2 {
                 font-size: 18px;
             }
-            
+
             .question-text {
                 font-size: 16px;
             }
-            
+
             button {
                 padding: 10px 20px;
                 font-size: 14px;
@@ -266,7 +266,7 @@
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        
+
         <div id="cardsContainer">
             <!-- Cards will be generated here -->
         </div>
@@ -292,52 +292,94 @@
                 content: `
                     <p>Greetings, I'm Anika Nagpal, a 2nd-year MBBS student at GMERS, Gotri.</p>
                     <p>I'm conducting research on antibiotic disposal practices - a topic that deserves more attention in the fight against antimicrobial resistance.</p>
-                    <p>Please answer honestly- there are no right or wrong answers.</p>
-                    <p>This research project is done under the guidance of my mentor.</p>
+                    <p>This study explores the knowledge, practices, and perspectives of healthcare professionals regarding antibiotic disposal protocols and stewardship.</p>
+                    <p>This research project is done under the guidance of my mentor, Dr. Kajal Davara Ma'am.</p>
                     <p>Your participation contributes to understanding and improving antibiotic disposal practices. Thank you so much for your valuable time.</p>
                 `,
                 checkbox: "I understand the purpose of this research and voluntarily agree to participate."
             },
-            
+
             // CARD 1: Name and Specialization
             {
                 type: CARD_TYPES.NAME_SPECIALIZATION,
                 title: "Basic Information"
             },
-            
-            // CARDS 2-20: Questions 1-10
+
+            // CARDS 2-20: Questions 1-19
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "How significant do you consider the role of 'antibiotic disposal practices' in Antimicribial Resistance?",
-                options: ["Major role", "Important but secondary", "Insignificant"],
+                question: "How do you usually define the end-point of antibiotic stewardship — does it, in your view, include disposal protocols?",
+                options: ["Yes", "No", "Not certain"],
                 required: true,
                 autoAdvance: true
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Which route of disposal poses the greatest ecological risk according to you?",
-                options: ["Municipal solid waste", "Domestic drain/washbasin", "Controlled biomedical route", "Unused sample redistribution"],
+                question: "Which route of disposal poses the greatest ecological risk?",
+                options: ["Domestic drain/washbasin", "Municipal solid waste", "Controlled biomedical route", "Unused sample redistribution"],
                 required: true,
                 autoAdvance: true
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "The last time you disposed off antibiotics, where did u put them?",
-                options: ["Reused for non-clinical purpose (eg- fertilizer, plant growth booster)", "Disposed off in a violet colour medicinal waste bin", "Flushed down the drain", "Put in yellow colour - infectious waste bag", "Thrown into standard household bin"],
+                question: "Are you aware of any formal or institutional guideline on antibiotic disposal (CPCB / WHO / NMC / hospital SOP)?",
+                options: ["Yes", "Aware vaguely", "Not aware"],
                 required: true,
                 autoAdvance: true
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Do you think a structured 'take-back' mechanism through hospital pharmacy or public channels will be a practical solution?",
+                question: "Was antibiotic disposal ever formally addressed in your undergraduate or postgraduate training?",
+                options: ["Yes", "No"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Which of the following contributes most directly to antimicrobial resistance in the community?",
+                options: ["Incomplete therapy", "Overprescription", "Improper disposal", "All of the above"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "How significant do you consider antibiotic disposal in the overall AMR narrative?",
+                options: ["Central", "Important but secondary", "Marginal", "Negligible"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "In your opinion, who carries the primary operational responsibility for ensuring correct disposal?",
+                options: ["Treating clinician", "Hospital administration", "Pharmacist", "Regulatory authorities"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "In your institution, how well does the existing biomedical waste protocols cover antibiotic disposal?",
+                options: ["Fully integrated- specific bins/ guidelines exists", "Partially - antibiotics go with general pharma waste", "Not specified for antibiotics", "Unaware of any such protocol"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Would you support a structured 'take-back' mechanism through hospital pharmacy or public channels?",
                 options: ["Strongly yes", "Possibly", "No"],
                 required: true,
                 autoAdvance: true
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "How, do you think, are expired/unused antibiotics from your practice or ward currently discarded?",
-                options: ["Discarded with general waste", "Routed through biomedical waste management system", "Flushed down the drain", "Returned to supplier/distributor"],
+                question: "Do you believe clinicians discuss or reflect adequately on the disposal aspect of antibiotic stewardship?",
+                options: ["Routinely", "Occasionally", "Rarely", "Never"],
+                required: true,
+                autoAdvance: true
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "How are expired/unused antibiotics from your practice or ward currently discarded?",
+                options: ["Routed through biomedical waste management system", "Discarded with general waste", "Flushed or destroyed personally", "Returned to supplier/distributor"],
                 required: true,
                 autoAdvance: true
             },
@@ -364,24 +406,37 @@
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "What is the main reason for improper antibiotic disposal in your eyes?",
-                options: ["No separate bins available nearby", "Not sure which bin is correct for pills", "Seems too minor/ harmless", "People are too busy/ forgetful", "Noone enforces it"],
+                question: "Have you ever intervened or reported improper antibiotic disposal within your setup?",
+                options: ["Yes", "No"],
                 required: true,
-                autoAdvance:true
+                autoAdvance: true
             },
             {
                 type: CARD_TYPES.TEXT_INPUT,
-                question: "In your opinion, what practical step could improve how antibiotics are disposed off in community and within hospitals?",
+                question: "What is the most practical obstacle to proper antibiotic disposal at your workplace?",
+                required: true,
+                autoAdvance: false
+            },
+            {
+                type: CARD_TYPES.SINGLE_CHOICE,
+                question: "Would you support inclusion of disposal protocols within CME or antibiotic stewardship modules?",
+                options: ["Yes", "Maybe", "No"],
+                required: true,
+                autoAdvance: false
+            },
+            {
+                type: CARD_TYPES.TEXT_INPUT,
+                question: "What single actionable step, if implemented immediately, according to you, could make antibiotic disposal more compliant across institutions?",
                 required: true,
                 autoAdvance: false
             },
             {
                 type: CARD_TYPES.TEXTAREA,
-                question: "Further comments/views (if any)",
+                question: "Further comments/additional thoughts",
                 required: false,
                 autoAdvance: false
             },
-            
+
             // CARD 21: Thank You
             {
                 type: CARD_TYPES.THANK_YOU
@@ -404,7 +459,7 @@
         // Create all cards based on survey structure
         function createCards() {
             const container = document.getElementById('cardsContainer');
-            
+
             surveyStructure.forEach((cardConfig, index) => {
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -432,7 +487,7 @@
                         </div>
                         <div class="question-counter">Introduction</div>
                     `;
-                    
+
                 case CARD_TYPES.NAME_SPECIALIZATION:
                     return `
                         <h2>${cardConfig.title}</h2>
@@ -440,8 +495,10 @@
                         <input type="text" id="doctorName" placeholder="Enter your full name">
                         <div class="error-message" id="nameError">Please enter your name</div>
                         
+                        <div class="question-text">Your Designation (Intern/R1/R2/R3/Consultant)/ Specialization:</div>
                         <div class="question-text">Your Designation (Intern/R1/R2/R3/Consultant/Faculty)/ Specialization:</div>
                         <input type="text" id="doctorSpecialization" placeholder="Enter your designation/specialization">
+                        <div class="error-message" id="specializationError">Please enter your degignation/specialization</div>
                         <div class="error-message" id="specializationError">Please enter your desgignation/specialization</div>
                         
                     
@@ -455,7 +512,7 @@
                         </div>
                         <div class="question-counter">Basic Information</div>
                     `;
-                    
+
                 case CARD_TYPES.SINGLE_CHOICE:
                     const questionNumber = cardIndex - 1; // Subtract intro and name cards
                     return `
@@ -471,9 +528,9 @@
                             <button class="btn-prev">Previous</button>
                             ${cardIndex === totalCards - 2 ? '<button class="btn-submit">Submit</button>' : '<button class="btn-next">Next</button>'}
                         </div>
-                        <div class="question-counter">Question ${questionNumber} of 10</div>
+                        <div class="question-counter">Question ${questionNumber} of 19</div>
                     `;
-                    
+
                 case CARD_TYPES.TEXT_INPUT:
                     const textQuestionNumber = cardIndex - 1;
                     return `
@@ -485,9 +542,9 @@
                             <button class="btn-prev">Previous</button>
                             ${cardIndex === totalCards - 2 ? '<button class="btn-submit">Submit</button>' : '<button class="btn-next">Next</button>'}
                         </div>
-                        <div class="question-counter">Question ${textQuestionNumber} of 10</div>
+                        <div class="question-counter">Question ${textQuestionNumber} of 19</div>
                     `;
-                    
+
                 case CARD_TYPES.TEXTAREA:
                     const textareaQuestionNumber = cardIndex - 1;
                     return `
@@ -499,9 +556,9 @@
                             <button class="btn-prev">Previous</button>
                             <button class="btn-submit">Submit</button>
                         </div>
-                        <div class="question-counter">Question ${textareaQuestionNumber} of 10</div>
+                        <div class="question-counter">Question ${textareaQuestionNumber} of 19</div>
                     `;
-                    
+
                 case CARD_TYPES.THANK_YOU:
                     return `
                         <div class="thank-you">
@@ -510,7 +567,7 @@
                             <p>Your participation is greatly appreciated and will contribute to our understanding of antibiotic disposal practices.</p>
                         </div>
                     `;
-                    
+
                 default:
                     return '<div>Error: Unknown card type</div>';
             }
@@ -520,7 +577,7 @@
         function setupEventListeners() {
             document.addEventListener('click', function(e) {
                 const target = e.target;
-                
+
                 if (target.classList.contains('btn-next')) {
                     handleNext();
                 } else if (target.classList.contains('btn-prev')) {
@@ -563,11 +620,11 @@
             // Hide current card
             const currentCard = document.getElementById(`card-${currentCardIndex}`);
             if (currentCard) currentCard.classList.remove('active');
-            
+
             // Show new card
             const newCard = document.getElementById(`card-${cardIndex}`);
             if (newCard) newCard.classList.add('active');
-            
+
             // Update state
             currentCardIndex = cardIndex;
             updateProgressBar();
@@ -578,7 +635,7 @@
         function validateCurrentCard() {
             const currentCard = document.getElementById(`card-${currentCardIndex}`);
             const cardConfig = surveyStructure[currentCardIndex];
-            
+
             switch(cardConfig.type) {
                 case CARD_TYPES.INTRODUCTION:
                     const consentChecked = document.getElementById('consentCheckbox').checked;
@@ -588,28 +645,28 @@
                     }
                     document.getElementById('consentError').style.display = 'none';
                     return true;
-                    
+
                 case CARD_TYPES.NAME_SPECIALIZATION:
                         const name = document.getElementById('doctorName').value.trim();
                         const specialization = document.getElementById('doctorSpecialization').value.trim();
                         const experience = document.getElementById('yearsExperience').value.trim(); // NEW
-                        
+
                         let isValid = true;
-                        
+
                         if (!name) {
                             document.getElementById('nameError').style.display = 'block';
                             isValid = false;
                         } else {
                             document.getElementById('nameError').style.display = 'none';
                         }
-                        
+
                         if (!specialization) {
                             document.getElementById('specializationError').style.display = 'block';
                             isValid = false;
                         } else {
                             document.getElementById('specializationError').style.display = 'none';
                         }
-                        
+
                         // ADD VALIDATION FOR EXPERIENCE FIELD:
                         if (!experience) {
                             document.getElementById('experienceError').style.display = 'block';
@@ -617,9 +674,9 @@
                         } else {
                             document.getElementById('experienceError').style.display = 'none';
                         }
-                        
+
                         return isValid;
-                                        
+
                 case CARD_TYPES.SINGLE_CHOICE:
                     if (cardConfig.required) {
                         const selectedOption = currentCard.querySelector('.option.selected');
@@ -631,7 +688,7 @@
                         errorMessage.style.display = 'none';
                     }
                     return true;
-                    
+
                 case CARD_TYPES.TEXT_INPUT:
                 case CARD_TYPES.TEXTAREA:
                     if (cardConfig.required) {
@@ -644,7 +701,7 @@
                         errorMessage.style.display = 'none';
                     }
                     return true;
-                    
+
                 default:
                     return true;
             }
@@ -654,15 +711,15 @@
         function handleOptionSelect(optionElement) {
             const card = optionElement.closest('.card');
             const options = card.querySelectorAll('.option');
-            
+
             options.forEach(opt => opt.classList.remove('selected'));
             optionElement.classList.add('selected');
-            
+
             // Save response
             const cardIndex = parseInt(card.id.split('-')[1]);
             const questionNumber = cardIndex - 1;
             responses[`q${questionNumber}`] = optionElement.dataset.value;
-            
+
             // Auto-advance for eligible questions
             const cardConfig = surveyStructure[cardIndex];
             if (cardConfig.autoAdvance) {
@@ -699,7 +756,7 @@
         // Submit to Google Sheets
         function submitToGoogleSheets() {
             const scriptURL = 'https://script.google.com/macros/s/AKfycbyBejxmbL1mM1LClu_7CZ0apXM2whIPfSbQly-00HZKy3KPQACvCb0q_0kyQoUUhNUu/exec';
-            
+
             const data = {
                 'consent': responses.consent,
                 'name': responses.name || '',
@@ -707,12 +764,12 @@
                 'experience': responses.experience || '',
                 ...responses
             };
-            
+
             const formData = new URLSearchParams();
             for (const key in data) {
                 formData.append(key, data[key]);
             }
-            
+
             fetch(scriptURL, {
                 method: 'POST',
                 headers: {
@@ -731,17 +788,6 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
