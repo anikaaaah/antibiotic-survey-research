@@ -322,8 +322,8 @@
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "The last time you disposed of antibiotics, where did u put them?",
-                options: ["Treating clinician", "Hospital administration", "Pharmacist", "Regulatory authorities"],
+                question: "The last time you disposed off antibiotics, where did u put them?",
+                options: ["Reused for non-clinical purpose (eg- fertilizer, plant growth booster)", "Disposed off in a violet colour medicinal waste bin", "Flushed down the drain", "Put in yellow colour - infectious waste bag", "Thrown into standard household bin"],
                 required: true,
                 autoAdvance: true
             },
@@ -336,7 +336,7 @@
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Would you support a structured 'take-back' mechanism through hospital pharmacy or public channels?",
+                question: "Do you think a structured 'take-back' mechanism through hospital pharmacy or public channels will be a practical solution?",
                 options: ["Strongly yes", "Possibly", "No"],
                 required: true,
                 autoAdvance: true
@@ -351,7 +351,7 @@
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
                 question: "How are expired/unused antibiotics from your practice or ward currently discarded?",
-                options: ["Routed through biomedical waste management system", "Discarded with general waste", "Flushed or destroyed personally", "Returned to supplier/distributor"],
+                options: ["Discarded with general waste", "Routed through biomedical waste management system", "Flushed down the drain", "Returned to supplier/distributor"],
                 required: true,
                 autoAdvance: true
             },
@@ -377,22 +377,8 @@
                 autoAdvance: true
             },
             {
-                type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Have you ever intervened or reported improper antibiotic disposal within your setup?",
-                options: ["Yes", "No"],
-                required: true,
-                autoAdvance: true
-            },
-            {
                 type: CARD_TYPES.TEXT_INPUT,
                 question: "What is the most practical obstacle to proper antibiotic disposal at your workplace?",
-                required: true,
-                autoAdvance: false
-            },
-            {
-                type: CARD_TYPES.SINGLE_CHOICE,
-                question: "Would you support inclusion of disposal protocols within CME or antibiotic stewardship modules?",
-                options: ["Yes", "Maybe", "No"],
                 required: true,
                 autoAdvance: false
             },
@@ -404,7 +390,7 @@
             },
             {
                 type: CARD_TYPES.TEXTAREA,
-                question: "Further comments/additional thoughts",
+                question: "Further comments/views (if any)",
                 required: false,
                 autoAdvance: false
             },
@@ -758,6 +744,7 @@
 </body>
 
 </html>
+
 
 
 
