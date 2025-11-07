@@ -336,7 +336,7 @@
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "How, do you think, are expired/unused antibiotics from your practice or ward currently discarded?",
+                question: "How are expired/unused antibiotics from your practice or ward currently discarded?",
                 options: ["Discarded with general waste", "Routed through biomedical waste management system", "Flushed down the drain", "Returned to supplier/distributor"],
                 required: true,
                 autoAdvance: true
@@ -351,20 +351,13 @@
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
                 question: "Do you ever receive unused antibiotics back from patients?",
-                options: ["Yes, occasionally", "Rarely", "Never"],
+                options: ["Yes, always", "Occasionally", "Rarely", "Never"],
                 required: true,
                 autoAdvance: true
             },
             {
                 type: CARD_TYPES.SINGLE_CHOICE,
-                question: "How frequently are expiry audits conducted for antibiotic stocks in your practice/ward?",
-                options: ["Regularly scheduled", "Intermittent", "Only when flagged", "Not practiced"],
-                required: true,
-                autoAdvance: true
-            },
-            {
-                type: CARD_TYPES.SINGLE_CHOICE,
-                question: "What is the main reason for improper antibiotic disposal in your eyes?",
+                question: "What is the main reason for improper antibiotic disposal in your opinion?",
                 options: ["No separate bins available nearby", "Not sure which bin is correct for pills", "Seems too minor/ harmless", "People are too busy/ forgetful", "Noone enforces it"],
                 required: true,
                 autoAdvance:true
@@ -471,7 +464,7 @@
                             <button class="btn-prev">Previous</button>
                             ${cardIndex === totalCards - 2 ? '<button class="btn-submit">Submit</button>' : '<button class="btn-next">Next</button>'}
                         </div>
-                        <div class="question-counter">Question ${questionNumber} of 11</div>
+                        <div class="question-counter">Question ${questionNumber} of 10</div>
                     `;
                     
                 case CARD_TYPES.TEXT_INPUT:
@@ -485,7 +478,7 @@
                             <button class="btn-prev">Previous</button>
                             ${cardIndex === totalCards - 2 ? '<button class="btn-submit">Submit</button>' : '<button class="btn-next">Next</button>'}
                         </div>
-                        <div class="question-counter">Question ${textQuestionNumber} of 11</div>
+                        <div class="question-counter">Question ${textQuestionNumber} of 10</div>
                     `;
                     
                 case CARD_TYPES.TEXTAREA:
@@ -499,7 +492,7 @@
                             <button class="btn-prev">Previous</button>
                             <button class="btn-submit">Submit</button>
                         </div>
-                        <div class="question-counter">Question ${textareaQuestionNumber} of 11</div>
+                        <div class="question-counter">Question ${textareaQuestionNumber} of 10</div>
                     `;
                     
                 case CARD_TYPES.THANK_YOU:
@@ -731,6 +724,7 @@
 </body>
 
 </html>
+
 
 
 
